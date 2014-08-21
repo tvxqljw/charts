@@ -21,6 +21,12 @@
             text-align: left;
             line-height: 30px;
         }
+
+        @media  screen and (max-width: 768px) {
+            .div-container{
+                width: 100%;
+            }
+        }
     </style>
 
 
@@ -128,6 +134,7 @@ var chart5 = AmCharts.makeChart("chartdiv"+5,{
         "markerType": "circle",
         "title":"我是图例名称",
         "position": "bottom",
+        "switchColor":"red",
         "autoMargins": false
     },
     "dataProvider":chartData5,
