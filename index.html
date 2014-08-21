@@ -48,12 +48,167 @@
     <div id="chartdiv4" style="width: 100%; height:400px;"></div>
 </div>
 
+<div class="div-container">
+    <div class="chart-title">5</div>
+    <div id="chartdiv5" style="width: 100%; height:400px;"></div>
+</div>
+
+<div class="div-container">
+    <div class="chart-title">6</div>
+    <div id="chartdiv6" style="width: 100%; height:400px;"></div>
+</div>
 
 
 <!-- 导入Amcharts js 库 -->
 <script src="chartresources/javascript/amcharts/amcharts.js"></script>
 <script src="chartresources/javascript/amcharts/serial.js"></script>
+<script src="chartresources/javascript/amcharts/radar.js"></script>
+<script src="chartresources/javascript/amcharts/pie.js"></script>
 <script type="text/javascript">
+var chartData5 = [
+    {
+        "name":"Jin",
+        "work":100,
+        "age":22,
+        "success":77
+    },
+    {
+        "name":"Hannah",
+        "work":89,
+        "age":21,
+        "success":70
+    },
+    {
+        "name":"Daisy",
+        "work":121,
+        "age":24,
+        "success":99
+    },
+    {
+        "name":"Ken",
+        "work":152,
+        "age":25,
+        "success":150
+    },
+    {
+        "name":"Sam",
+        "work":55,
+        "age":19,
+        "success":52
+    },
+    {
+        "name":"Emily",
+        "work":103,
+        "age":22,
+        "success":80
+    },
+    {
+        "name":"John",
+        "work":147,
+        "age":25,
+        "success":140
+    }
+];
+
+
+//chart5
+var chart5 = AmCharts.makeChart("chartdiv"+5,{
+    "color":"#E7E7E7",
+    "type":"radar",
+    "theme": "dark",
+    "fillAlphas":0.3,
+    "fillColor":"#fff",
+    "backgroundAlpha":1,
+    "backgroundColor":"#3F3F4F",
+    "title":{
+        "text":"雷达图",
+        "size":15
+    },
+    "legend": {
+        "markerType": "circle",
+        "title":"我是图例名称",
+        "position": "bottom",
+        "autoMargins": false
+    },
+    "dataProvider":chartData5,
+    "graphs":[
+        {
+            "valueField": "work",
+            "bullet":"round",
+            "balloonText":"[[name]]'s num is [[value]]",
+            "lineColor":"#FF788B",
+            "fillColors":"#FF788B",
+            "fillAlphas":0.1,
+            "lineAlpha":0.2,
+            "lineThickness": 2,
+            "bulletAlpha":0,
+            "bulletBorderAlpha":0.5
+        },
+        {
+            "valueField": "age",
+            "bullet":"round",
+            "fillColors":"#787FB5",
+            "fillAlphas":0.1,
+            "balloonText":"[[name]]'s num is [[value]]",
+            "lineColor":"#787FB5",
+            "lineAlpha":0.2,
+            "lineThickness": 2,
+            "bulletAlpha":0,
+            "bulletBorderAlpha":0.5
+        },
+        {
+            "valueField": "success",
+            "bullet":"round",
+            "balloonText":"[[name]]'s num is [[value]]",
+            "lineColor":"#7BAB9F",
+            "fillColors":"#7BAB9F",
+            "lineAlpha":.2,
+            "fillAlphas":0.1,
+            "lineThickness": 2,
+            "bulletAlpha":0,
+            "bulletBorderAlpha":0.5
+        }
+
+    ],
+    "startDuration": 1,
+    "lineColor":"#fff",
+    "valueAxes": [{
+        "axisColor":"#fff",
+        "axisAlpha":.1,//纵坐标的透明度
+        "axisTitleOffset": 20,
+        "minimum": 0,
+        "gridColor":"#fff",
+        "gridAlpha":.2
+    }],
+    "categoryField":"name",
+    "exportConfig": {
+        "menuTop":"10px",
+        "menuRight":"10px",
+        "menuItems": [{
+            "icon": '/lib/3/images/export.png',
+            "format": 'png'
+        }]
+    }
+});
+
+console.log(chartData5);
+
+
+//chart6
+var chart6 = AmCharts.makeChart("chartdiv6",{
+    "type":"pie",
+    "legend": {
+        "markerType": "circle",
+        "title":"我是图例名称",
+        "position": "bottom",
+        "autoMargins": false
+    },
+    "dataProvider":chartData5,
+    "valueField":"success",
+    "titleField":"name",
+    "balloonText":"[[title]]'s success:([[percents]]%)"
+});
+
 
 //chart1
     var chartData1 =[
@@ -101,7 +256,7 @@
         chart1.categoryField = "country";
         var graph1 = new AmCharts.AmGraph();  //Graph图形
         graph1.valueField = "visits";
-        graph1.type = "column";  //type：column line
+        graph1.type = "column";  //type：column line step
         chart1.addGraph(graph1);
 
         var categoryAxis1 = chart1.categoryAxis;
@@ -214,6 +369,12 @@ var chart = AmCharts.makeChart("chartdiv4", {
         "cornerRadius":10,
         "offsetY":0
     },
+    "legend": {
+        "markerType": "circle",
+        "title":"我是图例名称",
+        "position": "bottom",
+        "autoMargins": false
+    },
     "theme": "dark",
     "type": "serial",
     "autoMargins": false,
@@ -224,7 +385,11 @@ var chart = AmCharts.makeChart("chartdiv4", {
     "pathToImages": "http://www.amcharts.com/lib/3/images/",
     "dataProvider": chartData,
     "valueAxes": [{
-        "axisAlpha": 0,
+        "axisAlpha": 1,
+        "inside": true
+    }],
+    "categoryAxes": [{
+        "axisAlpha": 1,
         "inside": true
     }],
     "graphs": [{
@@ -246,7 +411,7 @@ var chart = AmCharts.makeChart("chartdiv4", {
     "categoryField": "date",
     "categoryAxis": {
         "parseDates": true,
-        "axisAlpha": 0,
+        "axisAlpha": 1,
         "minHorizontalGap":60
     }
 });
@@ -254,13 +419,15 @@ var chart = AmCharts.makeChart("chartdiv4", {
 
 console.log(chart.title.text);
 
-chart.addListener("dataUpdated", zoomChart);
+chart.addListener("dataUpdated", zoomChart);//数据更新后触发事件
 //zoomChart();
 
 function zoomChart(){
     if(chart.zoomToIndexes){
         chart.zoomToIndexes(130, chartData.length - 1);
     }
+
+
 }
 
 
