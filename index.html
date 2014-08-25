@@ -21,6 +21,12 @@
             text-align: left;
             line-height: 30px;
         }
+
+        @media  screen and (max-width: 768px) {
+            .div-container{
+                width: 100%;
+            }
+        }
     </style>
     
 
@@ -29,408 +35,59 @@
 <body>
 
 <div class="div-container">
-    <div class="chart-title">1</div>
+    <div class="chart-title">1 Line with different colors for ups and downs</div>
     <div id="chartdiv1" style="width: 100%; height:400px;"></div>
 </div>
 
-<div class="div-container">
-    <div class="chart-title">2</div>
-    <div id="chartdiv2" style="width: 100%; height:400px;"></div>
-</div>
-
-<div class="div-container">
-    <div class="chart-title">3</div>
-    <div id="chartdiv3" style="width: 100%; height:400px;"></div>
-</div>
-
-<div class="div-container">
-    <div class="chart-title">4 Line with different colors for ups and downs</div>
-    <div id="chartdiv4" style="width: 100%; height:400px;"></div>
-</div>
-
-<div class="div-container">
-    <div class="chart-title">5</div>
-    <div id="chartdiv5" style="width: 100%; height:400px;"></div>
-</div>
-
-<div class="div-container">
-    <div class="chart-title">6</div>
-    <div id="chartdiv6" style="width: 100%; height:400px;"></div>
-</div>
+<div id="result"></div>
 
 
 <!-- 导入Amcharts js 库 -->
+<script src="chartresources/javascript/jquery.min.js"></script>
 <script src="chartresources/javascript/amcharts/amcharts.js"></script>
 <script src="chartresources/javascript/amcharts/serial.js"></script>
 <script src="chartresources/javascript/amcharts/radar.js"></script>
 <script src="chartresources/javascript/amcharts/pie.js"></script>
+<script src="chartData.js"></script>
+<script src="each-charts.js"></script>
 <script type="text/javascript">
-var chartData5 = [
-    {
-        "name":"Jin",
-        "work":100,
-        "age":22,
-        "success":77
-    },
-    {
-        "name":"Hannah",
-        "work":89,
-        "age":21,
-        "success":70
-    },
-    {
-        "name":"Daisy",
-        "work":121,
-        "age":24,
-        "success":99
-    },
-    {
-        "name":"Ken",
-        "work":152,
-        "age":25,
-        "success":150
-    },
-    {
-        "name":"Sam",
-        "work":55,
-        "age":19,
-        "success":52
-    },
-    {
-        "name":"Emily",
-        "work":103,
-        "age":22,
-        "success":80
-    },
-    {
-        "name":"John",
-        "work":147,
-        "age":25,
-        "success":140
-    }
-];
 
 
-//chart5
-var chart5 = AmCharts.makeChart("chartdiv"+5,{
-    "color":"#E7E7E7",
-    "type":"radar",
-    "theme": "dark",
-    "fillAlphas":0.3,
-    "fillColor":"#fff",
-    "backgroundAlpha":1,
-    "backgroundColor":"#3F3F4F",
-    "title":{
-        "text":"雷达图",
-        "size":15
-    },
-    "legend": {
-        "markerType": "circle",
-        "title":"我是图例名称",
-        "position": "bottom",
-        "autoMargins": false
-    },
-    "dataProvider":chartData5,
-    "graphs":[
-        {
-            "valueField": "work",
-            "bullet":"round",
-            "balloonText":"[[name]]'s num is [[value]]",
-            "lineColor":"#FF788B",
-            "fillColors":"#FF788B",
-            "fillAlphas":0.1,
-            "lineAlpha":0.2,
-            "lineThickness": 2,
-            "bulletAlpha":0,
-            "bulletBorderAlpha":0.5
-        },
-        {
-            "valueField": "age",
-            "bullet":"round",
-            "fillColors":"#787FB5",
-            "fillAlphas":0.1,
-            "balloonText":"[[name]]'s num is [[value]]",
-            "lineColor":"#787FB5",
-            "lineAlpha":0.2,
-            "lineThickness": 2,
-            "bulletAlpha":0,
-            "bulletBorderAlpha":0.5
-        },
-        {
-            "valueField": "success",
-            "bullet":"round",
-            "balloonText":"[[name]]'s num is [[value]]",
-            "lineColor":"#7BAB9F",
-            "fillColors":"#7BAB9F",
-            "lineAlpha":.2,
-            "fillAlphas":0.1,
-            "lineThickness": 2,
-            "bulletAlpha":0,
-            "bulletBorderAlpha":0.5
-        }
+    // data prepare
 
-    ],
-    "startDuration": 1,
-    "lineColor":"#fff",
-    "valueAxes": [{
-        "axisColor":"#fff",
-        "axisAlpha":.1,//纵坐标的透明度
-        "axisTitleOffset": 20,
-        "minimum": 0,
-        "gridColor":"#fff",
-        "gridAlpha":.2
-    }],
-    "categoryField":"name",
-    "exportConfig": {
-        "menuTop":"10px",
-        "menuRight":"10px",
-        "menuItems": [{
-            "icon": '/lib/3/images/export.png',
-            "format": 'png'
-        }]
-    }
-});
-
-console.log(chartData5);
+//    var chartData = [];
+//    function generateChartData() {
+//        $.ajax({
+//            type:"GET",//请求方式
+//            url : 'chartData.json',
+//            dataType: "json",//数据格式
+//            success : function(result) {
+//                alert("success");
+//            },
+//            error : function(XMLHttpRequest, textStatus, errorThrown) {
+//                alert("请求异常，请检查服务器是否正常运行！" + XMLHttpRequest.status + "  "
+//                        + XMLHttpRequest.readyState + "  " + textStatus);
+//            }
+//
+//        });
+//        console.log(chartData);
+//    }
 
 
-//chart6
-var chart6 = AmCharts.makeChart("chartdiv6",{
-    "type":"pie",
-    "legend": {
-        "markerType": "circle",
-        "title":"我是图例名称",
-        "position": "bottom",
-        "autoMargins": false
-    },
-    "dataProvider":chartData5,
-    "valueField":"success",
-    "titleField":"name",
-    "balloonText":"[[title]]'s success:([[percents]]%)"
-});
 
 
-//chart1
-    var chartData1 =[
-        {
-            "country":"USA",
-            "visits":4252
-        },
-        {
-            "country":"China",
-            "visits":6501
-        },
-        {
-            "country":"Japan",
-            "visits":1993
-        },
-        {
-            "country":"UK",
-            "visits":1253
-        },{
-            "country":"France",
-            "visits":1343
-        },
-        {
-            "country":"New Zealand",
-            "visits":2343
-        },
-        {
-            "country":"Canada",
-            "visits":3902
-        },
-        {
-            "country":"Australia",
-            "visits":3252
-        },
-        {
-            "country":"Russia",
-            "visits":313
-        }
-
-    ];
-
-    AmCharts.ready(function(){
-        var chart1 = new AmCharts.AmSerialChart();
-        chart1.dataProvider = chartData1;
-        chart1.categoryField = "country";
-        var graph1 = new AmCharts.AmGraph();  //Graph图形
-        graph1.valueField = "visits";
-        graph1.type = "column";  //type：column line step
-        chart1.addGraph(graph1);
-
-        var categoryAxis1 = chart1.categoryAxis;
-        categoryAxis1.autoGridCount = false;//缩小的时候下面的坐标不隐藏
-        categoryAxis1.gridCount = chartData1.length;
-        categoryAxis1.gridPosition = "start";//网格不跨列
-        categoryAxis1.labelRotation = 90;//下面坐标旋转
-
-        graph1.fillAlphas = .8;//
-        chart1.angle = 45;//上面倾斜
-        chart1.depth3D =5;//倾斜长度
-
-        graph1.balloonText = "[[category]]: <b>[[value]]<b>";
-
-        //chart2
-        var chart2 = new AmCharts.AmSerialChart();
-        chart2.dataProvider = chartData1;
-        chart2.categoryField = "country";
-        var graph2 = new AmCharts.AmGraph();  //Graph图形
-        graph2.valueField = "visits";
-        graph2.type = "line";  //type：column line
-        chart2.addGraph(graph2);
-
-        var categoryAxis2 = chart2.categoryAxis;
-        categoryAxis2.autoGridCount = false;//缩小的时候下面的坐标不隐藏
-        categoryAxis2.gridCount = chartData1.length;
-        categoryAxis2.gridPosition = "start";//网格不跨列
-        categoryAxis2.labelRotation = 90;//下面坐标旋转
-
-        graph2.fillAlphas = .5;//
-        chart2.angle = 45;//上面倾斜
-        chart2.depth3D =5;//倾斜长度
-        graph2.bullet = "square";
-        graph2.lineColor = "#243413"
-
-        graph2.balloonText = "[[category]]: <b>[[value]]<b>";
-
-        //chart3
-        var chart3 = new AmCharts.AmSerialChart();
-        chart3.dataProvider = chartData1;
-        chart3.categoryField = "country";
-        var graph3 = new AmCharts.AmGraph();  //Graph图形
-        graph3.valueField = "visits";
-        graph3.type = "line";  //type：column line
-        chart3.addGraph(graph3);
-
-        var categoryAxis3 = chart3.categoryAxis;
-        categoryAxis3.autoGridCount = false;//缩小的时候下面的坐标不隐藏
-        categoryAxis3.gridCount = chartData1.length;
-        categoryAxis3.gridPosition = "start";//网格不跨列
-        categoryAxis3.labelRotation = 90;//下面坐标旋转
-
-        graph3.fillAlphas = 0;//
-        chart3.angle = 45;//上面倾斜
-        chart3.depth3D =5;//倾斜长度
-        graph3.bullet = "round";
-        graph3.lineColor = "#8d1cc6"
-
-        graph3.balloonText = "[[category]]: <b>[[value]]<b>";
-
-
-        chart1.write('chartdiv1');
-        chart2.write('chartdiv2');
-        chart3.write('chartdiv3');
-    });
-
-    //chart4
-
-//chartdata 生成
-
-var chartData = generatechartData();
-
-function generatechartData() {
-    var chartData = [];
-    var firstDate = new Date();
-    firstDate.setDate(firstDate.getDate() -7); //7天前
-
-
-    for (var i = 0; i < 7; i++) {
-        // we create date objects here. In your data, you can have date strings
-        // and then set format of your dates using chart.dataDateFormat property,
-        // however when possible, use date objects, as this will speed up chart rendering.
-        var newDate = new Date(firstDate);
-        newDate.setDate(newDate.getDate() + i);
-
-        var visits = Math.round(Math.random() * 100 - 50);//value
-
-        chartData.push({
-            date: newDate,
-            visits: visits
+// make charts
+    function makeCharts(index,type,data,legendtitle){
+        var chart = AmCharts.makeChart("chartdiv"+index,{
+           "theme":"dark",
+            "type":type,
+            "dataProvider":data
         });
     }
 
-    return chartData;
-}
-
-//chart's style
-var chart = AmCharts.makeChart("chartdiv4", {
-    "backgroundAlpha":1,
-    "backgroundColor":"#AFB9C4", //必须要有backgroundAlpha的value值有效才行
-    "title":{
-        "text":"折线图",
-        "size":15
-    },
-    "balloon":{
-        "borderThickness":0,
-        "color":"#000",
-        "fillColor":"#ccc",
-        "animationDuration":0.1,
-        "cornerRadius":10,
-        "offsetY":0
-    },
-    "legend": {
-        "markerType": "circle",
-        "title":"我是图例名称",
-        "position": "bottom",
-        "autoMargins": false
-    },
-    "theme": "dark",
-    "type": "serial",
-    "autoMargins": false,
-    "marginLeft":8,
-    "marginRight":8,
-    "marginTop":10,
-    "marginBottom":26,
-    "pathToImages": "http://www.amcharts.com/lib/3/images/",
-    "dataProvider": chartData,
-    "valueAxes": [{
-        "axisAlpha": 1,
-        "inside": true
-    }],
-    "categoryAxes": [{
-        "axisAlpha": 1,
-        "inside": true
-    }],
-    "graphs": [{
-        "useNegativeColorIfDown":true,
-        "balloonText": "[[category]]<br><b>value: [[value]]</b>",
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletBorderColor": "#FFFFFF",
-        "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "lineColor": "#fdd400",
-        "negativeLineColor": "#67b7dc",
-        "valueField": "visits"
-    }],
-    "chartScrollbar": {
-    },
-    "chartCursor": {
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "axisAlpha": 1,
-        "minHorizontalGap":60
-    }
-});
-
-
-console.log(chart.title.text);
-
-chart.addListener("dataUpdated", zoomChart);//数据更新后触发事件
-//zoomChart();
-
-function zoomChart(){
-    if(chart.zoomToIndexes){
-        chart.zoomToIndexes(130, chartData.length - 1);
-    }
-
-
-}
 
 
 </script>
+
 </body>
 </html>
