@@ -46,3 +46,11 @@
         "success":140
     }
 ];
+
+/**
+ * make charts
+ * */
+
+chart1load();
+chart2load();
+chart5load();
